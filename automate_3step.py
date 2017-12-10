@@ -6,9 +6,9 @@ import shutil
 import fileinput
 
 """
-This script automates Arbin schedule file creation from a text file.
+This script automates Arbin schedule file creation from a text file for 3-step policies.
 author: pattia@stanford.edu 
-August 23, 2017
+December 4, 2017
 """
 
 # 1. Pull from AWS
@@ -51,12 +51,13 @@ else:
 # Filename should look something like: 20170814-2C_15per_4_4C
 for i in range(0,num_policies):
 	schedule_file_name = today2 + '-' + policies[i][0] +'C_' \
-		+ policies[i][1]+ 'per_' + policies[i][2]+ 'C'
+		+ policies[i][3]+ 'per_' + policies[i][1]+ 'C' \
+		+ policies[i][4]+ 'per_' + policies[i][2]+ 'C'
 	schedule_file_name = schedule_file_name.replace('.','_')
 	schedule_file_name = schedule_file_name + '.sdu'
 	print(schedule_file_name)
 	shutil.copy2('C:\\Users\\Arbin\\Documents\\GitHub\\'
-		+ 'automate-Arbin-schedule-files\\template.sdu', 
+		+ 'automate-Arbin-schedule-files\\template_3step.sdu', 
 		foldername + '\\' + schedule_file_name)
 
 	# 6. Change lines in text file
@@ -75,12 +76,20 @@ for i in range(0,num_policies):
 	data[461] = 'm_szCtrlValue=' + str(CC1) + '\n'
 
 	# Q1: Line 544
-	Q1  = round(float(policies[i][1])/100 * 1.1 * 10000)/10000
+	Q1  = round(float(policies[i][3])/100 * 1.1 * 10000)/10000
 	data[543] = 'Equation0_szRight=' + str(Q1) + '\n'
 
 	# CC2: Line 557
-	CC2  = round(float(policies[i][2]) * 1.1 * 10000)/10000
+	CC2  = round(float(policies[i][1]) * 1.1 * 10000)/10000
 	data[556] = 'm_szCtrlValue=' + str(CC2) + '\n'
+
+	# Q2: Line 626
+	Q2  = round(float(policies[i][4])/100 * 1.1 * 10000)/10000
+	data[625] = 'Equation0_szRight=' + str(Q2) + '\n'
+
+	# CC3: Line 652
+	CC3  = round(float(policies[i][2]) * 1.1 * 10000)/10000
+	data[651] = 'm_szCtrlValue=' + str(CC3) + '\n'
 
 	## Current ranges
 
@@ -91,10 +100,16 @@ for i in range(0,num_policies):
 		data[459] = 'm_szCurrentRange=Range2\n'
 
 	# CC2 current range: Line 555
-	if float(policies[i][2])*1.1 > 6:
+	if float(policies[i][1])*1.1 > 6:
 		data[554] = 'm_szCurrentRange=Range1\n'
 	else:
 		data[554] = 'm_szCurrentRange=Range2\n'
+
+	# CC3 current range: Line 650
+	if float(policies[i][2])*1.1 > 6:
+		data[649] = 'm_szCurrentRange=Range1\n'
+	else:
+		data[649] = 'm_szCurrentRange=Range2\n'
 
 	# and write everything back
 	with open(foldername + '\\' + schedule_file_name, 'w') as file:
