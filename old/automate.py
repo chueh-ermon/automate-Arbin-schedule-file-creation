@@ -85,13 +85,13 @@ for i in range(0,num_policies):
 	## Current ranges
 
 	# CC1 current range: Line 460
-	if float(policies[i][0])*1.1 > 6:
+	if float(policies[i][0])*1.1 > 5:
 		data[459] = 'm_szCurrentRange=Range1\n'
 	else:
 		data[459] = 'm_szCurrentRange=Range2\n'
 
 	# CC2 current range: Line 555
-	if float(policies[i][2])*1.1 > 6:
+	if float(policies[i][2])*1.1 > 5:
 		data[554] = 'm_szCurrentRange=Range1\n'
 	else:
 		data[554] = 'm_szCurrentRange=Range2\n'
