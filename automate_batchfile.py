@@ -5,6 +5,7 @@ import csv
 import shutil
 import fileinput
 import numpy as np
+import random
 
 """
 This script automates Arbin schedule file creation from a text file for 4-step policies.
@@ -24,7 +25,7 @@ if not os.path.isfile(filename):
 	print('Cannot find policy file')
 	quit()
 
-print('Create new schedule files')
+print('Create new batch file')
 
 # 2. Read in csv
 policies = []
@@ -32,6 +33,9 @@ with open(filename) as csvDataFile:
     csvReader = csv.reader(csvDataFile)
     for row in csvReader:
         policies.append(row)
+
+print('Randomize policies')
+random.shuffle(policies)
 
 num_policies = len(policies)
 
