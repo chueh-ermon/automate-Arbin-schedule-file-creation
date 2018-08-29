@@ -1,7 +1,7 @@
 [Version Section]
 Current_Version=Schedule Version 7.00.13
 [Signature Section]
-Signature={D5B7D699-435B-41F2-87BB-AD054029AC5E}
+Signature={18393824-6460-48AE-B795-AAE7019C75EB}
 [Schedule]
 m_uMUID=1540776939
 m_szCreator=
@@ -103,7 +103,7 @@ m_bLogDataLimit=1
 m_szGotoStep=Next Step
 Equation0_szLeft=PV_CHAN_Step_Time
 Equation0_szCompareSign=>=
-Equation0_szRight=1800
+Equation0_szRight=10800
 Equation1_szLeft=
 Equation1_szCompareSign=
 Equation1_szRight=
@@ -850,7 +850,7 @@ m_bLogDataLimit=1
 m_szGotoStep=CC1
 Equation0_szLeft=PV_CHAN_Cycle_Index
 Equation0_szCompareSign=<=
-Equation0_szRight=100
+Equation0_szRight=122
 Equation1_szLeft=
 Equation1_szCompareSign=
 Equation1_szRight=

@@ -9,12 +9,12 @@ import numpy as np
 """
 This script automates Arbin schedule file creation from a text file for 4-step policies.
 author: pattia@stanford.edu 
-June 19, 2018
+August 28, 2018
 """
 
 today = date.today().strftime('%Y-%m-%d')
 today2 = date.today().strftime('%Y%m%d')
-filename = 'policies.csv'
+filename = 'policies_all.csv'
 
 # 1. Check for CSV in current folder 'policies.csv'
 print('Searching for ' + filename)
@@ -38,7 +38,8 @@ num_policies = len(policies)
 print(str(num_policies) + ' new policies to create')
 
 # 3. Make new folder
-foldername = 'C:\\ArbinSoftware\\MITS_PRO\\Work\\' + today + '_tests'
+# foldername = 'C:\\ArbinSoftware\\MITS_PRO\\Work\\' + today + '_tests'
+foldername = 'C:\\ArbinSoftware\\MITS_PRO\\Work\\OED'
 if not os.path.exists(foldername):
 	os.makedirs(foldername)
 	print('Created new directory: ' + foldername)
@@ -68,8 +69,9 @@ for i in range(0,num_policies):
 
 	schedule_file_name = today2 + '-{0}_{1}_{2}_{3}'.format(C1, C2, C3, C4)
 	schedule_file_name = schedule_file_name.replace('.','pt')
-	schedule_file_name = schedule_file_name.replace('pt0','')
 	schedule_file_name = schedule_file_name + '.sdu'
+	schedule_file_name = schedule_file_name.replace('pt0_','_')
+	schedule_file_name = schedule_file_name.replace('pt0.','.')
 	print(schedule_file_name)
 	shutil.copy2('template_4step.sdu', foldername + '\\' + schedule_file_name)
 

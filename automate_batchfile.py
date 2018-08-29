@@ -6,6 +6,9 @@ import shutil
 import fileinput
 import numpy as np
 import random
+import tkinter as tk
+from tkinter import filedialog
+
 
 """
 This script automates Arbin schedule file creation from a text file for 4-step policies.
@@ -15,7 +18,12 @@ June 19, 2018
 
 today = date.today().strftime('%Y-%m-%d')
 today2 = date.today().strftime('%Y%m%d')
-filename = 'policies_batchA.csv'
+#filename = 'policies_batchA.csv'
+
+root = tk.Tk()
+root.withdraw()
+
+filename = filedialog.askopenfilename()
 
 # 1. Check for CSV in current folder 'policies.csv'
 print('Searching for ' + filename)
@@ -33,9 +41,6 @@ with open(filename) as csvDataFile:
     csvReader = csv.reader(csvDataFile)
     for row in csvReader:
         policies.append(row)
-
-print('Randomize policies')
-random.shuffle(policies)
 
 num_policies = len(policies)
 
@@ -59,7 +64,7 @@ for i in range(0,num_policies):
 	C1 = float(policies[i][0])
 	C2 = float(policies[i][1])
 	C3 = float(policies[i][2])
-	C4 = float(policies[i][3])
+	C4 = round(0.2/(1/6-(0.2/C1 + 0.2/C2 + 0.2/C3))*1000)/1000
 
 	# Currents
 	CC1 = round(C1 * 1.1 * 10000)/10000
@@ -73,13 +78,14 @@ for i in range(0,num_policies):
 	print('  ', CC1, CC2, CC3, CC4)
 	"""
 
-	schedule_file_name = '20180619-{0}_{1}_{2}_{3}'.format(C1, C2, C3, C4)
+	schedule_file_name = '20180828-{0}_{1}_{2}_{3}'.format(C1, C2, C3, C4)
 	schedule_file_name = schedule_file_name.replace('.','pt')
-	schedule_file_name = schedule_file_name.replace('pt0','')
 	schedule_file_name = schedule_file_name + '.sdu'
+	schedule_file_name = schedule_file_name.replace('pt0_','_')
+	schedule_file_name = schedule_file_name.replace('pt0.','.')
 	print(schedule_file_name)
 
-	data[14+49*i] = "IvChan_"+str(i)+"_m_szScheduleName=2018-06-19_tests\\" + schedule_file_name + "\n"
+	data[14+49*i] = "IvChan_"+str(i)+"_m_szScheduleName=OED\\" + schedule_file_name + "\n"
 
 # and write everything back
 with open(batch_file_name, 'w') as file:
