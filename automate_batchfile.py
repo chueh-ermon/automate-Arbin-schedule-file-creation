@@ -43,6 +43,7 @@ with open(filename) as csvDataFile:
         policies.append(row)
 
 num_policies = len(policies)
+random.shuffle(policies)
 
 foldername = 'C:\\ArbinSoftware\\MITS_PRO\\Work\\'
 batch_file_name = foldername + today2 + '_batch.bth'
