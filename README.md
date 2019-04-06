@@ -8,5 +8,5 @@ This code generates both "schedule files" and "batch files" for Arbin LBT potent
 - **"Batch files"** are files that map schedule files to channels (i.e. mapping experiments to batteries)
 
 This repository has two main scripts:
-- **automate_4step.py** creates 4-step (really 6-step) charging protocols based on X
+- **automate_4step.py** creates 4-step (really 6-step) charging protocols based on a csv like policies_all.csv
 - **automate_batchfile.py** randomly assigns charging policies from files like [these](https://github.com/petermattia/battery-parameter-spaces/tree/master/data/batch) to schedule files
