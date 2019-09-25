@@ -11,4 +11,4 @@ This repository has two main scripts:
 - **automate_4step.py** creates 4-step (really 6-step) charging protocols based on a csv like policies_all.csv
 - **automate_batchfile.py** randomly assigns charging policies from files like [these](https://github.com/petermattia/battery-parameter-spaces/tree/master/data/batch) to schedule files
 
-Both of these scripts simply load in a template .sdu or .bth file and replacing the appropriate text.
+Both of these scripts simply load in a template .sdu or .bth file and replace the appropriate text. The resulting schedule files are available in the "OED schedule files" directory.
